@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "SDSU RateMyProfessor Integration",
+  "version": "2.0",
+  "description": "Displays RateMyProfessor ratings on SDSU class search",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://www.ratemyprofessors.com/*",
+    "https://cmsweb.cms.sdsu.edu/*",
+    "https://*.ratemyprofessors.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://cmsweb.cms.sdsu.edu/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "SDSU RMP Integration"
+  }
+}
