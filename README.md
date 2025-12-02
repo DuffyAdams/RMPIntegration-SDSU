@@ -1,5 +1,10 @@
 # SDSU RateMyProfessor Integration
 
+<p align="center">
+  <img src="icon.png" alt="SDSU RateMyProfessor Extension Icon" width="128">
+</p>
+
+# SDSU RateMyProfessor Integration
 A Chrome extension that seamlessly integrates RateMyProfessors ratings directly into the SDSU class search portal, helping students make informed decisions about their course selections.
 
 ## Features
