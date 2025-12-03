@@ -111,16 +111,37 @@ async function runProgram() {
 
 function updateInstructorCells(fullName, ratingData) {
    const { cells } = getInstructorCells();
-   
+
    for (let cell of cells) {
       const cellText = cell.innerText.trim();
-      
+
       if (cellText === fullName) {
-         // Format the display: "Name (Rating - NumRatings)"
-         const displayText = `${fullName} (${ratingData})`;
-         
+         let displayText;
+         let ratingColor = '#4A90E2'; // Default blue
+
+         if (ratingData && ratingData !== "N/A") {
+            const parts = ratingData.split(' - ');
+            const rating = parseFloat(parts[0]);
+            const numReviews = parts[1] || '0';
+
+            // Color code based on rating
+            if (rating >= 4.0) {
+               ratingColor = '#28a745'; // Green for very good
+            } else if (rating >= 3.0) {
+               ratingColor = '#ffc107'; // Yellow for okay
+            } else if (rating >= 2.0) {
+               ratingColor = '#fd7e14'; // Orange for poor
+            } else if (rating >= 1.0) {
+               ratingColor = '#dc3545'; // Red for very bad
+            }
+
+            displayText = `${fullName} (<span style="color: ${ratingColor}; font-weight: bold;">${parts[0]}</span> | ${numReviews} reviews)`;
+         } else {
+            displayText = `${fullName} (${ratingData})`;
+         }
+
          // Add some styling
-         cell.innerHTML = `<span style="color: #4A90E2; font-weight: 500;">${displayText}</span>`;
+         cell.innerHTML = `<span style="font-weight: 500;">${displayText}</span>`;
          console.log(`RMP Extension: Updated cell with: ${displayText}`);
       }
    }
